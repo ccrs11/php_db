@@ -1,7 +1,7 @@
 <?php 
 
 
-namespace App\Contollers;
+namespace App\Controllers;
 
 use Database\MySQLi\Connection;
 

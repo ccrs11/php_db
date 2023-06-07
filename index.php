@@ -1,6 +1,6 @@
 <?php
 
-use App\Contollers\IncomesController;
+use App\Controllers\IncomesController;
 use App\Enumbs\IncomesTypeEnum;
 use App\Enumbs\PaymentMethodEnum;
 

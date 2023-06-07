@@ -33,14 +33,14 @@ class Connection{
     //create a method that make a connection this method must be private
     private function make_connection(){
         $server='localhost';
-        $database='finazas_personales';
+        $database='finanzas_personales';
         $username='ccrs11';
-        $password='hola1107HI*';
+        $password='1234';
         // stablish a connection with programming object oriented manner
         // as namespace ahead the class to mysql the class thinks tat the class  mysqli is in that path or namespace 
         // but this is not true, mysqli function is part of the global namespace for that reason use put \
         // that character indicates to the class that the function is not taked from the class selected by namespace.
-        $mysqli = new \mysqli($server,$database,$username,$password);
+        $mysqli = new \mysqli($server,$username,$password,$database);
         //check the connection and find errors
         if($mysqli->connect_errno)
             die("The server connection failed:{$mysqli->connect_error}");
