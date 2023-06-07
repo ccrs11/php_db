@@ -15,14 +15,9 @@ Class WithdrawalsController{
     }
     function store($data){
         $connection=Connection::getInstance()->get_db_connection();
-        $rowAfected=$connection->exec("INSERT INTO withdrawals(payment_method,type,date,amount,description) VALUES(
-            {$data['payment_method']},
-            {$data['type']},
-            '{$data['date']}',
-            {$data['amount']},
-            '{$data['description']}'
-        )");
-        echo "se han insertado $rowAfected filas en la base de datos";
+        $stmt=$connection->prepare("INSERT INTO withdrawals(payment_method,type,date,amount,description) VALUES(:payment_method,:type,:date,:amount,:description)");
+
+        $stmt->execute($data);
     }
     function show(){
 
