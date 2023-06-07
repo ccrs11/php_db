@@ -48,8 +48,13 @@ Class WithdrawalsController{
 
         $stmt->execute();
     }
-    function show(){
-
+    function show($id){
+        $stmt=$this->connection->prepare("SELECT * FROM withdrawals WHERE id=:id");
+        $stmt->execute([
+            ":id"=>$id
+        ]);
+        $results=$stmt->fetch();
+        var_dump($results);
     }
     function edit(){
 

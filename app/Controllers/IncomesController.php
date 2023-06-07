@@ -3,30 +3,37 @@
 
 namespace App\Controllers;
 
-use Database\MySQLi\Connection;
+use Database\PDO\Connection;
 
 Class IncomesController{
+
+    private $connection;
+    function __construct()
+    {
+        $this->connection=Connection::getInstance()->get_db_connection();
+    }
     
     function index(){
+        $stmt=$this->connection->prepare("SELECT * FROM incomes");
+        $stmt->execute();
+        while($row=$stmt->fetch()){
+            echo "Ganaste". $row["amount"] . "USD en: " . $row["description"] . "\n";
+        }
 
     }
     function create(){
 
     }
     function store($data){
-        $connection=Connection::getInstance()->get_db_connection();
-        $stmt=$connection->prepare("INSERT INTO incomes (payment_method,type,date,amount,description) VALUES(?,?,?,?,?);");
-        $stmt->bind_param("iisds",$payment_method,$type,$date,$amount,$description);
-
-        $payment_method=$data['payment_method'];
-        $type=$data['type'];
-        $date=$data['date'];
-        $amount=$data['amount'];
-        $description=$data['description'];
+        $stmt=$this->connection->prepare("INSERT INTO incomes (payment_method,type,date,amount,description) VALUES(:payment_method,:type,:date,:amount,:description);");
+        $stmt->bindParam(":payment_method",$data["payment_method"]);
+        $stmt->bindParam(":type",$data["type"]);
+        $stmt->bindParam(":date",$data["date"]);
+        $stmt->bindParam(":amount",$data["amount"]);
+        $stmt->bindParam(":description",$data["description"]);
         
         $stmt->execute();
 
-        echo "se han insertado {$stmt->affected_rows} filas en la base de datos";
     }
     function show(){
 
