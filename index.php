@@ -21,11 +21,11 @@ $incomes_controller->store(
 //* use the store method from the controller Withdrawals to store information in the database
 $withdrawals_controller=new WithdrawalsController();
 $withdrawals_controller->store([
-    ":payment_method" => PaymentMethodEnum::CreditCard->value,
-    ":type" => WithdrawalsTypeEnum::Purchase->value,
-    ":date" => date("Y-m-d H:i:s"),
-    ":amount" => 20,
-    ":description" => "Hi this is the first credit card payment"
+    "payment_method" => PaymentMethodEnum::CreditCard->value,
+    "type" => WithdrawalsTypeEnum::Purchase->value,
+    "date" => date("Y-m-d H:i:s"),
+    "amount" => 20,
+    "description" => "Hi this is the first credit card payment"
 ]);
 
 
