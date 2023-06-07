@@ -1,0 +1,18 @@
+{
+    "name": "gbp/php_db",
+    "description": "this is a project use to learn php and database connection.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "ccrs11",
+            "email": "ccrs11@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\": "database/"
+        }
+    },
+    "require": {}
+}
