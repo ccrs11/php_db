@@ -33,9 +33,9 @@ class Connection{
     //create a method that make a connection this method must be private
     private function make_connection(){
         $server='localhost';
-        $database='finazas_personales';
+        $database='finanzas_personales';
         $username='ccrs11';
-        $password='hola1107HI*';
+        $password='1234';
         // stablish a connection with programming object oriented manner
         // as namespace ahead the class to mysql the class thinks tat the class  PDO is in that path or namespace 
         // but this is not true, PDO function is part of the global namespace for that reason use put \
