@@ -40,7 +40,8 @@ $incomes_controller = new IncomesController();
     "amount" => 20,
     "description" => "Hi this is the first credit card payment"
 ]); */
-$incomes_controller->index();
+//$incomes_controller->index(1);
+$incomes_controller->destroy(1);
 
 
 

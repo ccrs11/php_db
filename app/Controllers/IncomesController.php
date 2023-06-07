@@ -48,7 +48,22 @@ Class IncomesController{
     function update(){
 
     }
-    function destroy(){
+    function destroy($id){
+        // await
+        $this->connection->beginTransaction();
+        //query with prepare to avoid SQL inyection
+        $stmt=$this->connection->prepare("DELETE FROM incomes WHERE id=:id");
+        //execute the object stmt with the placeholder :id
+        $stmt->execute([
+            ":id"=>$id
+        ]);
+        //
+        $sure=readline("Est'as seguro de eliminar el registro? ");
+        if($sure == "no"){
+            $this->connection->rollback();
+        }else{
+            $this->connection->commit();
+        }
 
     }    
 }
