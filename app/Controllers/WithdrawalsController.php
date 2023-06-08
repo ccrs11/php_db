@@ -49,21 +49,41 @@ Class WithdrawalsController{
         $stmt->execute();
     }
     function show($id){
-        $stmt=$this->connection->prepare("SELECT * FROM withdrawals WHERE id=:id");
+        $stmt=$this->connection->prepare("SELECT * FROM withdrawals WHERE id=:id;");
         $stmt->execute([
             ":id"=>$id
         ]);
-        $results=$stmt->fetch();
-        var_dump($results);
+        $result=$stmt->fetch(\PDO::FETCH_ASSOC);
+        echo "dice que gastaste {$result['amount']}";
     }
     function edit(){
 
     }
-    function update(){
-
+    function update($data,$id){
+        $stmt=$this->connection->prepare("UPDATE withdrawals SET
+        payment_method= :payment_Method,
+        type = :type,
+        date = :date,
+        amount = :amount,
+        description = :description
+        WHERE id = :id;
+        ");
+        $stmt -> execute(
+            [
+                ":id"=>$id,
+                ":payment_method" => $data["payment_method"],
+                ":type" => $data["type"],
+                ":date" => $data["date"],
+                ":amount" => $data["amount"],
+                ":description" => $data["description"]
+            ]
+        );
     }
-    function destroy(){
-
+    function destroy($id){
+        $stmt = $this->connection->prepare("DELETE * FROM withdrawals WHERE id=:id;");
+        $stmt->execute([
+            ":id"=>$id
+        ]);
     }    
 }
 

@@ -39,31 +39,41 @@ Class IncomesController{
         $stmt->execute();
 
     }
-    function show(){
-
+    function show($id){
+        $stmt=$this->connection->prepare("SELECT FROM incomes where id=:id");
+        $stmt->execute([
+            ":id"=>$id
+        ]);
     }
     function edit(){
 
     }
-    function update(){
-
+    function update($data,$id){
+        $stmt=$this->connection->prepare("UPDATE FROM incomes SET
+            payment_method = :payment_method,
+            type = :type,
+            date = :date,
+            amount = :amount,
+            description = :description
+            WHERE id = :id;"
+        );
+        $stmt->execute([
+            ":id"=>$id,
+            ":payment_method"=>$data["payment_method"],
+            ":type"=>$data["type"],
+            ":date"=>$data["date"],
+            ":amount"=>$data["amount"],
+            ":description"=>$data["description"]
+            ]
+        );
     }
     function destroy($id){
-        // await
-        $this->connection->beginTransaction();
         //query with prepare to avoid SQL inyection
         $stmt=$this->connection->prepare("DELETE FROM incomes WHERE id=:id");
         //execute the object stmt with the placeholder :id
         $stmt->execute([
             ":id"=>$id
         ]);
-        //
-        $sure=readline("Est'as seguro de eliminar el registro? ");
-        if($sure == "no"){
-            $this->connection->rollback();
-        }else{
-            $this->connection->commit();
-        }
 
     }    
 }
